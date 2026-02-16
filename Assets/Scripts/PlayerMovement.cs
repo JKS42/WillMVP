@@ -30,6 +30,10 @@ public class Movement : MonoBehaviour
 
     [SerializeField] private Camera playerCamera;
 
+    [SerializeField] private GameObject bulletPrefab;
+
+    [SerializeField] private Transform firePoint; // Optional: where bullets spawn from (e.g., gun barrel)
+
     private InputActionMap playerActionMap;
 
     private InputAction moveAction;
@@ -124,12 +128,13 @@ public class Movement : MonoBehaviour
 
         attackAction.performed -= OnAttack;
 
-    }
+    }   
+    
 
     private void Update()
 
     {
-
+        
         HandleMovement();
 
         ApplyGravity();
@@ -221,7 +226,8 @@ public class Movement : MonoBehaviour
     {
 
         PerformRaycast();
-
+        GameObject tempPrefab = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        tempPrefab.GetComponent<Rigidbody>().linearVelocity = firePoint.forward * 20f; // Example bullet speed
     }
 
     private void PerformRaycast()

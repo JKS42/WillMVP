@@ -16,13 +16,18 @@ public class Break : MonoBehaviour
         if(isBroken)
         {
             rb.isKinematic = false;
+            Invoke("DestroyPieces", 5f); // Destroy the pieces after 5 seconds
         }
     }
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Player"))
+        if(other.gameObject.CompareTag("Bullet"))
         {
             isBroken = true;
         }
+    }
+    void DestroyPieces()
+    {
+        Destroy(this.gameObject);
     }
 }
