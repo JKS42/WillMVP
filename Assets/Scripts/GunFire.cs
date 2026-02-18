@@ -12,7 +12,7 @@ public class GunFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = playerCamera.transform.rotation; // Rotate player to match camera direction (optional, for FPS style)
+        //transform.rotation = playerCamera.transform.rotation; 
     }
     
 }

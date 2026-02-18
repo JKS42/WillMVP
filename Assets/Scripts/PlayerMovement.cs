@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour
 {
 
     [Header("Movement")]
-
+    [SerializeField] private float bulletSpeed;
     [SerializeField] private float moveSpeed = 5f;
 
     [SerializeField] private float sprintMultiplier = 1.5f;
@@ -227,7 +227,7 @@ public class Movement : MonoBehaviour
 
         PerformRaycast();
         GameObject tempPrefab = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        tempPrefab.GetComponent<Rigidbody>().linearVelocity = firePoint.forward * 20f; // Example bullet speed
+        tempPrefab.GetComponent<Rigidbody>().linearVelocity = firePoint.forward * bulletSpeed; // Example bullet speed
     }
 
     private void PerformRaycast()

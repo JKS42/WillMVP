@@ -539,7 +539,6 @@ GameObject:
   - component: {fileID: 509437469}
   - component: {fileID: 509437468}
   - component: {fileID: 509437467}
-  - component: {fileID: 509437471}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -642,19 +641,6 @@ Transform:
   - {fileID: 1904225380}
   m_Father: {fileID: 1361199745}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -70.72}
---- !u!114 &509437471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 509437466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6605fabcd79a6d546919a27ae203bb94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GunFire
-  playerCamera: {fileID: 1665987100}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1420,6 +1406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba97ebc4271318e46a868385a75f49e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
+  bulletSpeed: 15
   moveSpeed: 5
   sprintMultiplier: 1.5
   raycastDistance: 100
@@ -1743,7 +1730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6605fabcd79a6d546919a27ae203bb94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunFire
-  playerCamera: {fileID: 0}
+  playerCamera: {fileID: 1665987100}
 --- !u!1001 &2012331271
 PrefabInstance:
   m_ObjectHideFlags: 0
