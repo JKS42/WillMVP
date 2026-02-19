@@ -64,6 +64,8 @@ public class EnemyAI : MonoBehaviour
     }
     private void OnDrawGizmosSelected()
     {
+        if(player != null)
+        Gizmos.DrawLine(transform.position, player.position);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, engangementRange);
 
@@ -72,8 +74,14 @@ public class EnemyAI : MonoBehaviour
     }
     private void DectectPlayer()
     {
-        isPlayerVisible = Physics.CheckSphere(transform.position, visionRange, playerMask);
-        isPlayerInRange = Physics.CheckSphere(transform.position, engangementRange, playerMask);
+        if(player == null) return;
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        isPlayerInRange = distanceToPlayer <= engangementRange;
+        isPlayerVisible = distanceToPlayer <= engangementRange&&
+        Physics.Raycast(transform.position, (player.position - transform.position).normalized, distanceToPlayer, ~playerMask);
+       // isPlayerVisible = Physics.CheckSphere(transform.position, visionRange, playerMask);
+        //isPlayerInRange = Physics.CheckSphere(transform.position, engangementRange, playerMask);
     }
     private void FireProjectile()
     {
