@@ -7,6 +7,10 @@ using System.Collections;
 
 public class EnemyAI : MonoBehaviour
 {
+    [Header("Health")]
+    [SerializeField] private float currentHealth;
+    [SerializeField] private float MaxHealth;
+    private bool isDead = false;
     [Header("Refereneces")]
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Transform player;
@@ -53,7 +57,7 @@ public class EnemyAI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        currentHealth = MaxHealth;
     }
 
     // Update is called once per frame
@@ -159,6 +163,25 @@ public class EnemyAI : MonoBehaviour
         else if(isPlayerVisible && isPlayerInRange)
         {
             PreformAttack();
+        }
+    }
+    private void EnemyDeath()
+    {
+        isDead = true;
+        Collider col3D = GetComponent<Collider>();
+        if(col3D != null) col3D.enabled = false;
+
+        Destroy(this.gameObject);
+    }
+    public void TakeDamage(int damageAmount)
+    {
+        if (isDead) return;
+
+        currentHealth -= damageAmount;
+
+        if (currentHealth <= 0)
+        {
+            EnemyDeath();
         }
     }
 }

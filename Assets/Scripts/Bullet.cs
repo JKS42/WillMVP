@@ -19,4 +19,15 @@ public class Bullet : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+    private void OnCollisionEnter(Collision collision)
+{
+    EnemyAI enemy = collision.collider.GetComponent<EnemyAI>();
+    if (enemy != null)
+    {
+        enemy.TakeDamage(50);
+    }
+
+    Destroy(gameObject);
+}
+
 }
