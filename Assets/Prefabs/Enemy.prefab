@@ -225,5 +225,5 @@ MonoBehaviour:
   attackCooldown: 1
   forwardShotForce: 10
   verticalShotForce: 5
-  visionRange: 11.7
-  engangementRange: 7.12
+  visionRange: 20
+  engangementRange: 10
