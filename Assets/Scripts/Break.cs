@@ -16,7 +16,7 @@ public class Break : MonoBehaviour
         if(isBroken)
         {
             rb.isKinematic = false;
-            Invoke("DestroyPieces", 5f); // Destroy the pieces after 5 seconds
+            Invoke("DestroyPieces", 3f); // Destroy the pieces after 5 seconds
         }
     }
     void OnTriggerEnter(Collider other)

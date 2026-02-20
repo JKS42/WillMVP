@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5058591487623838900}
   - component: {fileID: 1316292564786750603}
   - component: {fileID: 4837780013287664646}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8914601998943771365}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: GunFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 6002807616434083213}
   - component: {fileID: 2746622181810023544}
   - component: {fileID: 6313035778757763988}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}

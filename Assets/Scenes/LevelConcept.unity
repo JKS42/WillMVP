@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chairs (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e1ee13a66576f842999e781d710c3f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -253,7 +257,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34896966}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 0.76
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -306,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a3ebb3a421235459cdee614ebbae8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Break
-  rb: {fileID: 111436021}
+  rb: {fileID: 34896969}
   isBroken: 0
 --- !u!1 &46789642
 GameObject:
@@ -421,6 +425,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Table (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2755707de7533f0428879399e2f5bc66, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -518,7 +526,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 111436018}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 0.76
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -636,6 +644,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3e1ee13a66576f842999e781d710c3f8, type: 3}
       propertyPath: m_Name
       value: Chairs (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e1ee13a66576f842999e781d710c3f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -823,7 +835,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 229228468}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 0.39
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -898,7 +910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a3ebb3a421235459cdee614ebbae8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Break
-  rb: {fileID: 372063002}
+  rb: {fileID: 229228472}
   isBroken: 0
 --- !u!1001 &239407636
 PrefabInstance:
@@ -909,16 +921,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.43479145
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.43479145
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.43479145
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.35
+      value: 0.43
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.05389595
+      value: 0.14
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.92
+      value: 16.14
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -958,10 +982,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -2995828229661691052, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1677722562}
+      addedObject: {fileID: 1677722561}
     - targetCorrespondingSourceObject: {fileID: -2995828229661691052, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1677722561}
+      addedObject: {fileID: 1677722562}
     - targetCorrespondingSourceObject: {fileID: -2995828229661691052, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1677722560}
@@ -970,10 +994,10 @@ PrefabInstance:
       addedObject: {fileID: 1677722565}
     - targetCorrespondingSourceObject: {fileID: -8917703946959959745, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1163370786}
+      addedObject: {fileID: 1163370785}
     - targetCorrespondingSourceObject: {fileID: -8917703946959959745, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1163370785}
+      addedObject: {fileID: 1163370786}
     - targetCorrespondingSourceObject: {fileID: -8917703946959959745, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1163370784}
@@ -982,10 +1006,10 @@ PrefabInstance:
       addedObject: {fileID: 1163370789}
     - targetCorrespondingSourceObject: {fileID: 8704484798943859418, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1624370698}
+      addedObject: {fileID: 1624370697}
     - targetCorrespondingSourceObject: {fileID: 8704484798943859418, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1624370697}
+      addedObject: {fileID: 1624370698}
     - targetCorrespondingSourceObject: {fileID: 8704484798943859418, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1624370696}
@@ -994,10 +1018,10 @@ PrefabInstance:
       addedObject: {fileID: 1624370701}
     - targetCorrespondingSourceObject: {fileID: 3021780583470790795, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 515947092}
+      addedObject: {fileID: 515947091}
     - targetCorrespondingSourceObject: {fileID: 3021780583470790795, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 515947091}
+      addedObject: {fileID: 515947092}
     - targetCorrespondingSourceObject: {fileID: 3021780583470790795, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 515947090}
@@ -1006,10 +1030,10 @@ PrefabInstance:
       addedObject: {fileID: 515947095}
     - targetCorrespondingSourceObject: {fileID: -6554458113972422046, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 34896970}
+      addedObject: {fileID: 34896969}
     - targetCorrespondingSourceObject: {fileID: -6554458113972422046, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 34896969}
+      addedObject: {fileID: 34896970}
     - targetCorrespondingSourceObject: {fileID: -6554458113972422046, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 34896968}
@@ -1018,10 +1042,10 @@ PrefabInstance:
       addedObject: {fileID: 34896973}
     - targetCorrespondingSourceObject: {fileID: -80796838390250655, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 111436022}
+      addedObject: {fileID: 111436021}
     - targetCorrespondingSourceObject: {fileID: -80796838390250655, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 111436021}
+      addedObject: {fileID: 111436022}
     - targetCorrespondingSourceObject: {fileID: -80796838390250655, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 111436020}
@@ -1247,6 +1271,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chairs (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e1ee13a66576f842999e781d710c3f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1268,7 +1296,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334686408}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 0.39
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1343,7 +1371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a3ebb3a421235459cdee614ebbae8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Break
-  rb: {fileID: 372063002}
+  rb: {fileID: 334686412}
   isBroken: 0
 --- !u!1 &364855206 stripped
 GameObject:
@@ -1385,7 +1413,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 372062998}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 0.39
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1580,6 +1608,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoffeeTable (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cbc1955363b4f1448b5b0b0b2985fe0a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1679,6 +1711,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoffeeTable (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cbc1955363b4f1448b5b0b0b2985fe0a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1750,6 +1786,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b850996984d3dd04bb472fca89c0ae64, type: 3}
       propertyPath: m_Name
       value: Lounger (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b850996984d3dd04bb472fca89c0ae64, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1823,6 +1863,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lounger (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b850996984d3dd04bb472fca89c0ae64, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1893,7 +1937,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515947088}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 0.76
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1946,7 +1990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a3ebb3a421235459cdee614ebbae8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Break
-  rb: {fileID: 111436021}
+  rb: {fileID: 515947091}
   isBroken: 0
 --- !u!1 &516400653
 GameObject:
@@ -2264,6 +2308,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3e1ee13a66576f842999e781d710c3f8, type: 3}
       propertyPath: m_Name
       value: Chairs (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e1ee13a66576f842999e781d710c3f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2742,7 +2790,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727375225}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 0.39
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2817,7 +2865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a3ebb3a421235459cdee614ebbae8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Break
-  rb: {fileID: 372063002}
+  rb: {fileID: 727375229}
   isBroken: 0
 --- !u!1001 &763987138
 PrefabInstance:
@@ -2882,6 +2930,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3e1ee13a66576f842999e781d710c3f8, type: 3}
       propertyPath: m_Name
       value: Chairs (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e1ee13a66576f842999e781d710c3f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2981,6 +3033,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3e1ee13a66576f842999e781d710c3f8, type: 3}
       propertyPath: m_Name
       value: Chairs (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e1ee13a66576f842999e781d710c3f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3130,6 +3186,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Table (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2755707de7533f0428879399e2f5bc66, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3201,6 +3261,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2755707de7533f0428879399e2f5bc66, type: 3}
       propertyPath: m_Name
       value: Table (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2755707de7533f0428879399e2f5bc66, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3300,6 +3364,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3e1ee13a66576f842999e781d710c3f8, type: 3}
       propertyPath: m_Name
       value: Chairs
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e1ee13a66576f842999e781d710c3f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3657,6 +3725,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chairs (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e1ee13a66576f842999e781d710c3f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3754,7 +3826,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163370782}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 0.76
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -3807,7 +3879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a3ebb3a421235459cdee614ebbae8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Break
-  rb: {fileID: 111436021}
+  rb: {fileID: 1163370785}
   isBroken: 0
 --- !u!1 &1224929119
 GameObject:
@@ -4515,6 +4587,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chairs (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e1ee13a66576f842999e781d710c3f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4923,6 +4999,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chairs (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e1ee13a66576f842999e781d710c3f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5022,6 +5102,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chairs (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e1ee13a66576f842999e781d710c3f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5065,7 +5149,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1624370694}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 0.76
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -5118,7 +5202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a3ebb3a421235459cdee614ebbae8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Break
-  rb: {fileID: 111436021}
+  rb: {fileID: 1624370697}
   isBroken: 0
 --- !u!1001 &1638843484
 PrefabInstance:
@@ -5183,6 +5267,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2755707de7533f0428879399e2f5bc66, type: 3}
       propertyPath: m_Name
       value: Table (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2755707de7533f0428879399e2f5bc66, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5538,6 +5626,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lounger
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b850996984d3dd04bb472fca89c0ae64, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5608,7 +5700,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1677722558}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 0.76
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -5661,7 +5753,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a3ebb3a421235459cdee614ebbae8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Break
-  rb: {fileID: 111436021}
+  rb: {fileID: 1677722561}
   isBroken: 0
 --- !u!1001 &1721499749
 PrefabInstance:
@@ -5726,6 +5818,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2755707de7533f0428879399e2f5bc66, type: 3}
       propertyPath: m_Name
       value: Table
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2755707de7533f0428879399e2f5bc66, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5882,16 +5978,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4078
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4078
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4078
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.09
+      value: 1.46
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.05389595
+      value: 0.29
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.51
+      value: 15.14
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5931,10 +6039,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -2995828229661691052, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1857969888}
+      addedObject: {fileID: 1857969887}
     - targetCorrespondingSourceObject: {fileID: -2995828229661691052, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1857969887}
+      addedObject: {fileID: 1857969888}
     - targetCorrespondingSourceObject: {fileID: -2995828229661691052, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1857969886}
@@ -5943,10 +6051,10 @@ PrefabInstance:
       addedObject: {fileID: 1857969889}
     - targetCorrespondingSourceObject: {fileID: -8917703946959959745, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 334686414}
+      addedObject: {fileID: 334686413}
     - targetCorrespondingSourceObject: {fileID: -8917703946959959745, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 334686413}
+      addedObject: {fileID: 334686414}
     - targetCorrespondingSourceObject: {fileID: -8917703946959959745, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 334686412}
@@ -5955,10 +6063,10 @@ PrefabInstance:
       addedObject: {fileID: 334686415}
     - targetCorrespondingSourceObject: {fileID: 8704484798943859418, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1819839456}
+      addedObject: {fileID: 1819839455}
     - targetCorrespondingSourceObject: {fileID: 8704484798943859418, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1819839455}
+      addedObject: {fileID: 1819839456}
     - targetCorrespondingSourceObject: {fileID: 8704484798943859418, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1819839454}
@@ -5967,10 +6075,10 @@ PrefabInstance:
       addedObject: {fileID: 1819839457}
     - targetCorrespondingSourceObject: {fileID: 3021780583470790795, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 229228474}
+      addedObject: {fileID: 229228473}
     - targetCorrespondingSourceObject: {fileID: 3021780583470790795, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 229228473}
+      addedObject: {fileID: 229228474}
     - targetCorrespondingSourceObject: {fileID: 3021780583470790795, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 229228472}
@@ -5979,10 +6087,10 @@ PrefabInstance:
       addedObject: {fileID: 229228475}
     - targetCorrespondingSourceObject: {fileID: -6554458113972422046, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 727375231}
+      addedObject: {fileID: 727375230}
     - targetCorrespondingSourceObject: {fileID: -6554458113972422046, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 727375230}
+      addedObject: {fileID: 727375231}
     - targetCorrespondingSourceObject: {fileID: -6554458113972422046, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 727375229}
@@ -5991,10 +6099,10 @@ PrefabInstance:
       addedObject: {fileID: 727375232}
     - targetCorrespondingSourceObject: {fileID: -80796838390250655, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 372063004}
+      addedObject: {fileID: 372063003}
     - targetCorrespondingSourceObject: {fileID: -80796838390250655, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 372063003}
+      addedObject: {fileID: 372063004}
     - targetCorrespondingSourceObject: {fileID: -80796838390250655, guid: 0793c77c6f2d8e442a71a4934d5aa2dc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 372063002}
@@ -6066,6 +6174,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lounger (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b850996984d3dd04bb472fca89c0ae64, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6114,7 +6226,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1819839450}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 0.39
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -6189,7 +6301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a3ebb3a421235459cdee614ebbae8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Break
-  rb: {fileID: 372063002}
+  rb: {fileID: 1819839454}
   isBroken: 0
 --- !u!1 &1825202978
 GameObject:
@@ -6358,7 +6470,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1857969882}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 0.39
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -6433,7 +6545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a3ebb3a421235459cdee614ebbae8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Break
-  rb: {fileID: 372063002}
+  rb: {fileID: 1857969886}
   isBroken: 0
 --- !u!1001 &1862981821
 PrefabInstance:
@@ -6498,6 +6610,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2755707de7533f0428879399e2f5bc66, type: 3}
       propertyPath: m_Name
       value: Table (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2755707de7533f0428879399e2f5bc66, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6763,6 +6879,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chairs (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e1ee13a66576f842999e781d710c3f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6861,6 +6981,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: cbc1955363b4f1448b5b0b0b2985fe0a, type: 3}
       propertyPath: m_Name
       value: CoffeeTable
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cbc1955363b4f1448b5b0b0b2985fe0a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7400,6 +7524,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoffeeTable (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cbc1955363b4f1448b5b0b0b2985fe0a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7609,6 +7737,10 @@ PrefabInstance:
     - target: {fileID: 700412021402273364, guid: 0a993febcaacce643b497cb66104f386, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2811536152716774707, guid: 0a993febcaacce643b497cb66104f386, type: 3}
+      propertyPath: m_Mass
+      value: 2.21
       objectReference: {fileID: 0}
     - target: {fileID: 5050011009306053929, guid: 0a993febcaacce643b497cb66104f386, type: 3}
       propertyPath: m_Name
