@@ -132,19 +132,22 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private void PreformAttack()
+   private void PreformAttack()
+{
+    agent.SetDestination(transform.position);
+
+    if (player != null)
     {
-        agent.SetDestination(transform.position);
-        if(player != null)
-        {
-            transform.LookAt(player);
-        }
-        if (!isOnAttackCoolDown)
-        {
-            FireProjectile();
-            StartCoroutine(AttackCoolDownRoutine());
-        }
+        Vector3 directionToPlayer = (player.position - transform.position).normalized;
+        transform.rotation = Quaternion.LookRotation(directionToPlayer);
     }
+
+    if (!isOnAttackCoolDown)
+    {
+        FireProjectile();
+        StartCoroutine(AttackCoolDownRoutine());
+    }
+}
 
     private void UpdateBehavourState()
     {
