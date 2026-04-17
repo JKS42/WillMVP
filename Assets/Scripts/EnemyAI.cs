@@ -157,7 +157,7 @@ public class EnemyAI : MonoBehaviour
         }
         else if(isPlayerVisible && !isPlayerInRange)
         {
-            PerformPatrol();
+            PerformChase();
         }
         else if(isPlayerVisible && isPlayerInRange)
         {

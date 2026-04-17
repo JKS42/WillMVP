@@ -212,7 +212,7 @@ MonoBehaviour:
   currentHealth: 100
   MaxHealth: 100
   agent: {fileID: 3595673757796147665}
-  player: {fileID: 700412021402273364, guid: 0a993febcaacce643b497cb66104f386, type: 3}
+  player: {fileID: 0}
   FirePoint: {fileID: 6380852648674391740}
   EnemyBulletPrefab: {fileID: 1323451105410521088, guid: 0cbb9d89471a93d4f97e1f557c6743ef, type: 3}
   playerMask:
