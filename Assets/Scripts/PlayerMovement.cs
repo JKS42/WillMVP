@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 using UnityEngine;
 
 using UnityEngine.InputSystem;
@@ -34,6 +36,8 @@ public class Movement : MonoBehaviour
 
     [SerializeField] private Transform firePoint; // Optional: where bullets spawn from (e.g., gun barrel)
 
+    public PlayerHealth playerHealth;
+
     private InputActionMap playerActionMap;
 
     private InputAction moveAction;
@@ -46,6 +50,8 @@ public class Movement : MonoBehaviour
 
     private InputAction attackAction;
 
+    private InputAction ReloadAction;
+
     private Vector3 velocity;
 
     private float gravity = -9.81f;
@@ -53,8 +59,15 @@ public class Movement : MonoBehaviour
     [SerializeField] private float jumpForce = 5f;
 
     [SerializeField] private float crouchHeight = 0.6f;
+    
+    public float timer = 3;
+    public GameObject reload;
 
     private float normalHeight = 2f;
+    void Start()
+    {
+        playerHealth.setMaxHealth(100);
+    }
 
     private void Awake()
 
@@ -90,6 +103,8 @@ public class Movement : MonoBehaviour
 
         attackAction = playerActionMap.FindAction("Attack");
 
+        ReloadAction = playerActionMap.FindAction("Reload");
+
         // Store normal height
 
         normalHeight = characterController.height;
@@ -112,9 +127,30 @@ public class Movement : MonoBehaviour
 
         attackAction.performed += OnAttack;
 
+        ReloadAction.performed += OnReload;
+
     }
 
-    private void OnDisable()
+    public void Timer()
+    {
+        timer -= Time.deltaTime;
+
+        if (timer <= 0)
+        {
+            Debug.Log("Weapon reloaded!");
+            timer = 3; // Reset timer for next reload
+            reload.SetActive(false);
+        }
+    }
+
+    private void OnReload(InputAction.CallbackContext context)
+    {
+        reload.SetActive(true);
+        Timer();
+        
+    }
+
+    private void OnDisable()
 
     {
 
@@ -127,6 +163,8 @@ public class Movement : MonoBehaviour
         crouchAction.canceled -= OnStopCrouch;
 
         attackAction.performed -= OnAttack;
+    
+        ReloadAction.performed -= OnReload;
 
     }   
     
@@ -142,6 +180,8 @@ public class Movement : MonoBehaviour
         characterController.Move(velocity * Time.deltaTime);
 
         PerformRaycast();
+        Timer();
+        
 
     }
 
@@ -285,5 +325,19 @@ public class Movement : MonoBehaviour
         return Physics.Raycast(rayOrigin, rayDirection, out hit, raycastDistance, raycastLayer);
 
     }
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "EnemyBullet")
+        {
+            playerHealth.SetHealth(playerHealth.health - 10);
+            Debug.Log("Player hit! Health: " + playerHealth.health);
+            if (playerHealth.health <= 0)
+            {
+                Debug.Log("Player died!");
+                Destroy(gameObject);
+            }
+        }
+
+    }
 
 }
