@@ -1935,6 +1935,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 197
       objectReference: {fileID: 0}
+    - target: {fileID: 6661430018092427742, guid: ab20cbe864b05374f94236b0943fc879, type: 3}
+      propertyPath: m_Name
+      value: Reload
+      objectReference: {fileID: 0}
+    - target: {fileID: 6661430018092427742, guid: ab20cbe864b05374f94236b0943fc879, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8225840815730417252, guid: ab20cbe864b05374f94236b0943fc879, type: 3}
       propertyPath: m_Name
       value: UI
