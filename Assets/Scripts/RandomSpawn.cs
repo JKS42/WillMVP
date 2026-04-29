@@ -10,6 +10,7 @@ public class RandomSpawn : MonoBehaviour
     
     private float spawnTimer = 0f; // Current timer
     private float nextSpawnTime; // Next spawn time (randomized)
+    public int spawnCount = 0; // Counter for spawned NPCs
     
     void Start()
     {
@@ -18,7 +19,7 @@ public class RandomSpawn : MonoBehaviour
 
     void Update()
     {
-        SpawnTimer();
+        
     }
     
     public void SpawnTimer()
@@ -35,10 +36,21 @@ public class RandomSpawn : MonoBehaviour
     
     public void SpawnerNPC()
     {
-        // Randomly choose between the two spawn points
-        Transform selectedSpawnPoint = Random.value > 0.5f ? spawnPoint1 : spawnPoint2;
+        if(spawnCount > 0)
+        {
+            // Randomly choose between the two spawn points
+            Transform selectedSpawnPoint = Random.value > 0.5f ? spawnPoint1 : spawnPoint2;
         
-        Instantiate(npcPrefab, selectedSpawnPoint.position, selectedSpawnPoint.rotation);
-        Debug.Log("NPC Spawned at: " + selectedSpawnPoint.name);
+            Instantiate(npcPrefab, selectedSpawnPoint.position, selectedSpawnPoint.rotation);
+            Debug.Log("NPC Spawned at: " + selectedSpawnPoint.name);
+            spawnCount--;
+        }
+
+        
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        SpawnerNPC();
+        SpawnTimer();
     }
 }
