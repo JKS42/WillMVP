@@ -1,112 +1,95 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Mousemovement : MonoBehaviour
-
+public class MouseMovement : MonoBehaviour
 {
+	[Header("Mouse Look")]
+	[SerializeField] private float mouseSensitivity = 2f;
+	[SerializeField] private float maxLookAngle = 90f;
 
-    [Header("Mouse Look")]
+	[Header("References")]
+	[SerializeField] private Camera playerCamera;
+	[SerializeField] private Transform playerBody;
+	[SerializeField] private InputActionAsset inputActions;
 
-    [SerializeField] private float mouseSensitivity = 2f;
+	private InputActionMap playerActionMap;
+	private InputAction lookAction;
+	private float xRotation;
 
-    [SerializeField] private float maxLookAngle = 90f;
+	private void Awake()
+	{
+		if (playerCamera == null)
+			playerCamera = GetComponentInChildren<Camera>();
 
-    [Header("References")]
+		// If this script is on the camera, yaw should rotate the parent/player body.
+		if (playerBody == null)
+		{
+			if (playerCamera != null && playerCamera.transform == transform && transform.parent != null)
+				playerBody = transform.parent;
+			else
+				playerBody = transform;
+		}
 
-    [SerializeField] private Camera playerCamera;
+		if (inputActions == null)
+			inputActions = Resources.Load<InputActionAsset>("InputSystem_Actions");
 
-    [SerializeField] private InputActionAsset inputActions;
+		if (inputActions == null)
+		{
+			Debug.LogError("InputSystem_Actions asset not found in Resources.", this);
+			enabled = false;
+			return;
+		}
 
-    private InputActionMap playerActionMap;
+		playerActionMap = inputActions.FindActionMap("Player");
+		lookAction = playerActionMap != null ? playerActionMap.FindAction("Look") : null;
 
-    private InputAction lookAction;
+		if (playerActionMap == null || lookAction == null)
+		{
+			Debug.LogError("Could not find Player/Look input actions.", this);
+			enabled = false;
+			return;
+		}
 
-    private float xRotation = 0f;
+		Cursor.lockState = CursorLockMode.Locked;
+	}
 
-    private void Awake()
+	private void OnEnable()
+	{
+		if (playerActionMap != null)
+			playerActionMap.Enable();
+	}
 
-    {
+	private void OnDisable()
+	{
+		if (playerActionMap != null)
+			playerActionMap.Disable();
+	}
 
-        // Get camera if not assigned
+	private void Update()
+	{
+		HandleMouseLook();
+	}
 
-        if (playerCamera == null)
+	private void HandleMouseLook()
+	{
+		if (playerCamera == null || playerBody == null || lookAction == null)
+			return;
 
-            playerCamera = GetComponentInChildren<Camera>();
+		Vector2 lookInput = lookAction.ReadValue<Vector2>();
 
-        // Setup input system
+		// Yaw rotates the body/root object.
+		playerBody.Rotate(Vector3.up * lookInput.x * mouseSensitivity);
 
-        if (inputActions == null)
+		// Pitch rotates only the camera.
+		xRotation -= lookInput.y * mouseSensitivity;
+		xRotation = Mathf.Clamp(xRotation, -maxLookAngle, maxLookAngle);
+		playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+	}
 
-            inputActions = Resources.Load<InputActionAsset>("InputSystem_Actions");
-
-        playerActionMap = inputActions.FindActionMap("Player");
-
-        lookAction = playerActionMap.FindAction("Look");
-
-        // Lock and hide cursor
-
-        Cursor.lockState = CursorLockMode.Locked;
-
-    }
-
-    private void OnEnable()
-
-    {
-
-        playerActionMap.Enable();
-
-    }
-
-    private void OnDisable()
-
-    {
-
-        playerActionMap.Disable();
-
-    }
-
-    private void Update()
-
-    {
-
-        HandleMouseLook();
-
-    }
-
-    private void HandleMouseLook()
-
-    {
-
-        Vector2 lookInput = lookAction.ReadValue<Vector2>();
-
-        // Rotate player body left/right (yaw)
-
-        transform.Rotate(Vector3.up * lookInput.x * mouseSensitivity);
-
-        // Rotate camera up/down (pitch)
-
-        xRotation -= lookInput.y * mouseSensitivity;
-
-        xRotation = Mathf.Clamp(xRotation, -maxLookAngle, maxLookAngle);
-
-        playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
-    }
-
-    // Toggle cursor lock (optional, for UI/menus)
-
-    public void ToggleCursorLock()
-
-    {
-
-        if (Cursor.lockState == CursorLockMode.Locked)
-
-            Cursor.lockState = CursorLockMode.Confined;
-
-        else
-
-            Cursor.lockState = CursorLockMode.Locked;
-
-    }
-
+	public void ToggleCursorLock()
+	{
+		Cursor.lockState = Cursor.lockState == CursorLockMode.Locked
+			? CursorLockMode.Confined
+			: CursorLockMode.Locked;
+	}
 }
