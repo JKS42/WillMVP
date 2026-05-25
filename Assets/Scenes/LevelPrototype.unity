@@ -101882,23 +101882,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &2454070630522442605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1441942069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86af79361e6c0d446890ce2ed22d98e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MouseMovement
-  mouseSensitivity: 0.3
-  maxLookAngle: 60
-  playerCamera: {fileID: 2454070630522442602}
-  playerBody: {fileID: 2454070630522442603}
-  inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!4 &7481879673753456046 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6763599309124057275, guid: a86ab100e5027554d9cd626a97880454, type: 3}
@@ -101938,7 +101921,7 @@ PrefabInstance:
       objectReference: {fileID: 7481879673753456046}
     - target: {fileID: 5767497279288903294, guid: a86ab100e5027554d9cd626a97880454, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5767497279288903294, guid: a86ab100e5027554d9cd626a97880454, type: 3}
       propertyPath: inputActions
@@ -102011,9 +101994,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5857515198144582918, guid: a86ab100e5027554d9cd626a97880454, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2454070630522442604}
-    - targetCorrespondingSourceObject: {fileID: 5857515198144582918, guid: a86ab100e5027554d9cd626a97880454, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2454070630522442605}
   m_SourcePrefab: {fileID: 100100000, guid: a86ab100e5027554d9cd626a97880454, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
