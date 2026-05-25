@@ -285,6 +285,8 @@ MonoBehaviour:
   playerHealth: {fileID: 0}
   jumpForce: 1
   crouchHeight: 0.6
+  timer: 3
+  reload: {fileID: 0}
 --- !u!143 &3874555565596153164
 CharacterController:
   m_ObjectHideFlags: 0
@@ -367,6 +369,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   health: 100
   projectile: {fileID: 1323451105410521088, guid: 0cbb9d89471a93d4f97e1f557c6743ef, type: 3}
+  UI: {fileID: 0}
+  reload: {fileID: 0}
   healthBar: {fileID: 0}
 --- !u!1 &8938928470375936153
 GameObject:
