@@ -76,12 +76,21 @@ public class MouseMovement : MonoBehaviour
 			return;
 
 		Vector2 lookInput = lookAction.ReadValue<Vector2>();
+		Look(lookInput);
+	}
+
+	// Simple look method you can call from other scripts
+	// (e.g., if you later swap input systems or want AI to aim the player).
+	public void Look(Vector2 lookInput)
+	{
+		if (playerCamera == null || playerBody == null)
+			return;
 
 		// Yaw rotates the body/root object.
-		playerBody.Rotate(Vector3.up * lookInput.x * mouseSensitivity);
+		playerBody.Rotate(Vector3.up * lookInput.x * mouseSensitivity * Time.deltaTime);
 
 		// Pitch rotates only the camera.
-		xRotation -= lookInput.y * mouseSensitivity;
+		xRotation -= lookInput.y * mouseSensitivity * Time.deltaTime;
 		xRotation = Mathf.Clamp(xRotation, -maxLookAngle, maxLookAngle);
 		playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 	}
