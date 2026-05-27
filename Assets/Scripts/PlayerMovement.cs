@@ -1,343 +1,67 @@
-using System;
-using System.Threading;
 using UnityEngine;
-
 using UnityEngine.InputSystem;
 
-  
-
-public class Movement : MonoBehaviour
-
+public class PlayerMovement : MonoBehaviour
 {
+    [Header("Movement")]
+    public float moveSpeed = 5f;
+    public float groundDrag = 5f;
 
-    [Header("Movement")]
-    [SerializeField] private float bulletSpeed;
-    [SerializeField] private float moveSpeed = 5f;
+    [Header("Ground Check")]
+    public float playerHeight = 2f;
+    public LayerMask whatIsGround;
+    bool grounded;
+    public Transform orientation;
 
-    [SerializeField] private float sprintMultiplier = 1.5f;
+    [Header("Input")]
+    // Assign an InputAction (Value - Vector2) in the Inspector (InputActionReference)
+    public InputActionReference moveAction;
 
-    [Header("Raycast")]
+    Vector2 moveInput;
+    Rigidbody rb;
 
-    [SerializeField] private float raycastDistance = 100f;
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
-    [SerializeField] private LayerMask raycastLayer = -1; // Default: all layers
+    void OnEnable()
+    {
+        if (moveAction != null) moveAction.action.Enable();
+    }
 
-    [SerializeField] private bool drawRaycastDebug = true;
+    void OnDisable()
+    {
+        if (moveAction != null) moveAction.action.Disable();
+    }
 
-    [Header("References")]
-
-    [SerializeField] private CharacterController characterController;
-
-    [SerializeField] private InputActionAsset inputActions;
-
-    [SerializeField] private Camera playerCamera;
-
-    [SerializeField] private GameObject bulletPrefab;
-
-    [SerializeField] private Transform firePoint; // Optional: where bullets spawn from (e.g., gun barrel)
-
-    public PlayerHealth playerHealth;
-
-    private InputActionMap playerActionMap;
-
-    private InputAction moveAction;
-
-    private InputAction sprintAction;
-
-    private InputAction jumpAction;
-
-    private InputAction crouchAction;
-
-    private InputAction attackAction;
-
-    private InputAction ReloadAction;
-
-    private Vector3 velocity;
-
-    private float gravity = -9.81f;
-
-    [SerializeField] private float jumpForce = 5f;
-
-    [SerializeField] private float crouchHeight = 0.6f;
-    
-    public float timer = 3;
-    public GameObject reload;
-
-    private float normalHeight = 2f;
     void Start()
     {
-        playerHealth.setMaxHealth(100);
+        if (rb != null) rb.freezeRotation = true;
     }
 
-    private void Awake()
-
-    {
-
-        // Get character controller if not assigned
-
-        if (characterController == null)
-
-            characterController = GetComponent<CharacterController>();
-
-        // Get camera if not assigned
-
-        if (playerCamera == null)
-
-            playerCamera = GetComponentInChildren<Camera>();
-
-        // Setup input system
-
-        if (inputActions == null)
-
-            inputActions = Resources.Load<InputActionAsset>("InputSystem_Actions");
-
-        playerActionMap = inputActions.FindActionMap("Player");
-
-        moveAction = playerActionMap.FindAction("Move");
-
-        sprintAction = playerActionMap.FindAction("Sprint");
-
-        jumpAction = playerActionMap.FindAction("Jump");
-
-        crouchAction = playerActionMap.FindAction("Crouch");
-
-        attackAction = playerActionMap.FindAction("Attack");
-
-        ReloadAction = playerActionMap.FindAction("Reload");
-
-        // Store normal height
-
-        normalHeight = characterController.height;
-
-    }
-
-    private void OnEnable()
-
-    {
-
-        playerActionMap.Enable();
-
-        // Subscribe to input actions
-
-        jumpAction.performed += OnJump;
-
-        crouchAction.performed += OnCrouch;
-
-        crouchAction.canceled += OnStopCrouch;
-
-        attackAction.performed += OnAttack;
-
-        ReloadAction.performed += OnReload;
-
-    }
-
-    public void Timer()
+    void Update()
     {
-        timer -= Time.deltaTime;
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
-        if (timer <= 0)
-        {
-            Debug.Log("Weapon reloaded!");
-            timer = 3; // Reset timer for next reload
-            reload.SetActive(false);
-        }
+        if (moveAction != null)
+            moveInput = moveAction.action.ReadValue<Vector2>();
+
+        if (rb == null) return;
+
+        rb.linearDamping = grounded ? groundDrag : 0f;
     }
 
-    private void OnReload(InputAction.CallbackContext context)
+    void FixedUpdate()
     {
-        reload.SetActive(true);
-        Timer();
-        
+        MovePlayer();
     }
 
-    private void OnDisable()
-
-    {
-
-        playerActionMap.Disable();
-
-        jumpAction.performed -= OnJump;
-
-        crouchAction.performed -= OnCrouch;
-
-        crouchAction.canceled -= OnStopCrouch;
-
-        attackAction.performed -= OnAttack;
-    
-        ReloadAction.performed -= OnReload;
-
-    }   
-    
-
-    private void Update()
-
-    {
-        
-        HandleMovement();
-
-        ApplyGravity();
-
-        characterController.Move(velocity * Time.deltaTime);
-
-        PerformRaycast();
-        Timer();
-        
-
-    }
-
-    private void HandleMovement()
-
-    {
-
-        Vector2 moveInput = moveAction.ReadValue<Vector2>();
-
-        bool isSprinting = sprintAction.IsPressed();
-
-        // Convert 2D input to 3D movement
-
-        Vector3 moveDirection = transform.forward * moveInput.y + transform.right * moveInput.x;
-
-        // Apply sprint multiplier
-
-        float currentSpeed = moveSpeed * (isSprinting ? sprintMultiplier : 1f);
-
-        // Update horizontal velocity
-
-        velocity.x = moveDirection.x * currentSpeed;
-
-        velocity.z = moveDirection.z * currentSpeed;
-
-    }
-
-    private void ApplyGravity()
-
-    {
-
-        if (characterController.isGrounded && velocity.y < 0)
-
-        {
-
-            velocity.y = -2f; // Small negative value to keep grounded
-
-        }
-
-        else
-
-        {
-
-            velocity.y += gravity * Time.deltaTime;
-
-        }
-
-    }
-
-    private void OnJump(InputAction.CallbackContext context)
-
-    {
-
-        if (characterController.isGrounded)
-
-        {
-
-            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
-
-        }
-
-    }
-
-    private void OnCrouch(InputAction.CallbackContext context)
-
-    {
-
-        characterController.height = crouchHeight;
-
-    }
-
-    private void OnStopCrouch(InputAction.CallbackContext context)
-
-    {
-
-        characterController.height = normalHeight;
-
-    }
-
-    private void OnAttack(InputAction.CallbackContext context)
-
-    {
-
-        PerformRaycast();
-        GameObject tempPrefab = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        tempPrefab.GetComponent<Rigidbody>().linearVelocity = firePoint.forward * bulletSpeed; // Example bullet speed
-    }
-
-    private void PerformRaycast()
-
-    {
-
-        // Use camera forward for more intuitive aiming
-
-        Vector3 rayOrigin = playerCamera.transform.position;
-
-        Vector3 rayDirection = playerCamera.transform.forward;
-
-        // Draw debug ray (visible in Scene view)
-
-        if (drawRaycastDebug)
-
-            Debug.DrawRay(rayOrigin, rayDirection * raycastDistance, Color.red, 0.1f);
-
-        // Perform the raycast
-
-        if (Physics.Raycast(rayOrigin, rayDirection, out RaycastHit hit, raycastDistance, raycastLayer))
-
-        {
-
-            Debug.Log($"Raycast hit: {hit.collider.gameObject.name} at distance {hit.distance:F2}");
-
-            Debug.Log($"Hit point: {hit.point}, Normal: {hit.normal}");
-
-            // Example: Draw a sphere at hit point
-
-            Debug.DrawRay(hit.point, hit.normal * 0.5f, Color.green, 0.1f);
-
-        }
-
-        else
-
-        {
-
-            Debug.Log("Raycast did not hit anything");
-
-        }
-
-    }
-
-    // Optional: Public method to perform raycast from code (not just from input)
-
-    public bool TryRaycast(out RaycastHit hit)
-
-    {
-
-        Vector3 rayOrigin = playerCamera.transform.position;
-
-        Vector3 rayDirection = playerCamera.transform.forward;
-
-        return Physics.Raycast(rayOrigin, rayDirection, out hit, raycastDistance, raycastLayer);
-
-    }
-    public void OnCollisionEnter(Collision collision)
+    void MovePlayer()
     {
-        if (collision.gameObject.tag == "EnemyBullet")
-        {
-            playerHealth.SetHealth(playerHealth.health - 10);
-            Debug.Log("Player hit! Health: " + playerHealth.health);
-            if (playerHealth.health <= 0)
-            {
-                Debug.Log("Player died!");
-                Destroy(gameObject);
-            }
-        }
+        if (rb == null || orientation == null) return;
 
+        Vector3 moveDirection = orientation.forward * moveInput.y + orientation.right * moveInput.x;
+        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
     }
-
 }
