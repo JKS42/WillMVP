@@ -17914,6 +17914,7 @@ Transform:
   - {fileID: 2079624429}
   - {fileID: 1632618870}
   - {fileID: 248011996}
+  - {fileID: 1874741798}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &328623902
@@ -17957,11 +17958,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Movement
   moveSpeed: 10
   groundDrag: 5
-  playerheight: 2
+  playerHeight: 2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1024
   orientation: {fileID: 1632618870}
+  moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1001 &328880600
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90599,13 +90601,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1874741797}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.04, y: 1.155, z: -6.73}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.30988002, y: 1.155, z: -3.76987}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1676296816}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 328623901}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1874741799
 MonoBehaviour:
@@ -102520,4 +102522,3 @@ SceneRoots:
   - {fileID: 1848837920}
   - {fileID: 1954978692}
   - {fileID: 328623901}
-  - {fileID: 1874741798}
