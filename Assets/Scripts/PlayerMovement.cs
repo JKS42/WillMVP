@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Weapons")]
+    public GameObject[] weapons; // Array to hold weapon GameObjects
     [Header("Movement")]
     public float moveSpeed = 5f;
     public float groundDrag = 5f;
@@ -25,6 +27,9 @@ public class PlayerMovement : MonoBehaviour
     // Assign an InputAction (Value - Vector2) in the Inspector (InputActionReference)
     public InputActionReference moveAction;
     public InputActionReference jumpAction;
+    public InputActionReference weapon1;
+    public InputActionReference weapon2;
+    public InputActionReference weapon3;
 
     Vector2 moveInput;
     Rigidbody rb;
@@ -40,6 +45,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (moveAction != null) moveAction.action.Enable();
         if (jumpAction != null) jumpAction.action.Enable();
+        if (weapon1 != null) weapon1.action.Enable();
+        if (weapon2 != null) weapon2.action.Enable();
+        if (weapon3 != null) weapon3.action.Enable();
     }
 
     // Disable input actions when this component deactivates.
@@ -47,6 +55,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (moveAction != null) moveAction.action.Disable();
         if (jumpAction != null) jumpAction.action.Disable();
+        if (weapon1 != null) weapon1.action.Disable();
+        if (weapon2 != null) weapon2.action.Disable();
+        if (weapon3 != null) weapon3.action.Disable();
     }
 
     // Prevent rigidbody rotation at startup.
@@ -74,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
         rb.linearDamping = grounded ? groundDrag : 0f;
         SpeedControl();
+        WeaponSwitch();
     }
 
     // Apply movement forces every physics step.
@@ -81,6 +93,7 @@ public class PlayerMovement : MonoBehaviour
     {
         MovePlayer();
         ApplyExtraGravity();
+        
     }
 
     // Move the player using camera-relative input.
@@ -135,6 +148,26 @@ public class PlayerMovement : MonoBehaviour
         if(flatVel.magnitude > moveSpeed){
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
+        }
+    }
+    private void WeaponSwitch(){
+        if(weapon1 != null && weapon1.action.WasPressedThisFrame()){
+            Debug.Log("Weapon 1 Activated");
+            weapons[0].SetActive(true);
+            weapons[1].SetActive(false);
+            weapons[2].SetActive(false);
+        }
+        if(weapon2 != null && weapon2.action.WasPressedThisFrame()){
+            Debug.Log("Weapon 2 Activated");
+            weapons[0].SetActive(false);
+            weapons[1].SetActive(true);
+            weapons[2].SetActive(false);
+        }
+        if(weapon3 != null && weapon3.action.WasPressedThisFrame()){
+            Debug.Log("Weapon 3 Activated");
+            weapons[0].SetActive(false);
+            weapons[1].SetActive(false);
+            weapons[2].SetActive(true);
         }
     }
 }
