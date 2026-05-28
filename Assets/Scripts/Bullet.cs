@@ -4,6 +4,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public Timer timer;
+    [SerializeField] private int damage = 50;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,10 +22,10 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
 {
-    EnemyAI enemy = collision.collider.GetComponent<EnemyAI>();
+    EnemyAI enemy = collision.collider.GetComponentInParent<EnemyAI>();
     if (enemy != null)
     {
-        enemy.TakeDamage(50);
+        enemy.TakeDamage(damage);
     }
 
     Destroy(gameObject);
