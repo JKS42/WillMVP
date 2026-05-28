@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Weapons")]
     public GameObject[] weapons; // Array to hold weapon GameObjects
+    public GameObject[] weaponUI;
     [Header("Movement")]
     public float moveSpeed = 5f;
     public float groundDrag = 5f;
@@ -156,18 +157,27 @@ public class PlayerMovement : MonoBehaviour
             weapons[0].SetActive(true);
             weapons[1].SetActive(false);
             weapons[2].SetActive(false);
+            weaponUI[0].SetActive(true);
+            weaponUI[1].SetActive(false);
+            weaponUI[2].SetActive(false);
         }
         if(weapon2 != null && weapon2.action.WasPressedThisFrame()){
             Debug.Log("Weapon 2 Activated");
             weapons[0].SetActive(false);
             weapons[1].SetActive(true);
             weapons[2].SetActive(false);
+            weaponUI[0].SetActive(false);
+            weaponUI[1].SetActive(true);
+            weaponUI[2].SetActive(false);
         }
         if(weapon3 != null && weapon3.action.WasPressedThisFrame()){
             Debug.Log("Weapon 3 Activated");
             weapons[0].SetActive(false);
             weapons[1].SetActive(false);
             weapons[2].SetActive(true);
+            weaponUI[0].SetActive(false);
+            weaponUI[1].SetActive(false);
+            weaponUI[2].SetActive(true);
         }
     }
 }
