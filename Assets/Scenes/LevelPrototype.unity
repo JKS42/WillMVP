@@ -17891,9 +17891,10 @@ GameObject:
   - component: {fileID: 328623901}
   - component: {fileID: 328623902}
   - component: {fileID: 328623903}
+  - component: {fileID: 328623904}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17956,14 +17957,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba97ebc4271318e46a868385a75f49e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
-  moveSpeed: 10
+  moveSpeed: 5
   groundDrag: 5
+  jumpForce: 8
+  jumpCooldown: 0.25
+  airMultiplier: 0.4
+  fallMultiplier: 3
+  lowJumpMultiplier: 2
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1024
   orientation: {fileID: 1632618870}
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  jumpAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+--- !u!114 &328623904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328623900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51b53eb36a6db5a498a916f12bd2c5de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  health: 100
+  projectile: {fileID: 1323451105410521088, guid: 0cbb9d89471a93d4f97e1f557c6743ef, type: 3}
+  UI: {fileID: 0}
+  reload: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!1001 &328880600
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80345,10 +80369,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86af79361e6c0d446890ce2ed22d98e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MouseMovement
-  senx: 400
-  seny: 400
+  senx: 75
+  seny: 75
   orientation: {fileID: 1632618870}
-  playerBody: {fileID: 0}
+  playerBody: {fileID: 2079624429}
 --- !u!114 &1676296818
 MonoBehaviour:
   m_ObjectHideFlags: 0
