@@ -6,7 +6,15 @@ public class PlayerMovement : MonoBehaviour
     [Header("Weapons")]
     public GameObject[] weapons; // Array to hold weapon GameObjects
     public GameObject[] weaponUI;
-    
+    public int currentPistolAmmo;
+    public int currentShotgunAmmo;
+    public int currentRifleAmmo;
+    public int pistolAmmoCap = 15;
+    public int shotgunAmmoCap = 8;
+    public int rifleAmmoCap = 30;
+    public int pistolAmmoReserve;
+    public int shotgunAmmoReserve;
+    public int rifleAmmoReserve;
     [Header("Movement")]
     public float moveSpeed = 5f;
     public float groundDrag = 5f;
@@ -33,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
     public InputActionReference weapon2;
     public InputActionReference weapon3;
     public InputActionReference reloadAction;
+
+    public int currentWeaponIndex;
 
     Vector2 moveInput;
     Rigidbody rb;
@@ -157,6 +167,7 @@ public class PlayerMovement : MonoBehaviour
     private void WeaponSwitch(){
         if(weapon1 != null && weapon1.action.WasPressedThisFrame()){
             Debug.Log("Weapon 1 Activated");
+            currentWeaponIndex = 0;
             weapons[0].SetActive(true);
             weapons[1].SetActive(false);
             weapons[2].SetActive(false);
@@ -166,6 +177,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if(weapon2 != null && weapon2.action.WasPressedThisFrame()){
             Debug.Log("Weapon 2 Activated");
+            currentWeaponIndex = 1;
             weapons[0].SetActive(false);
             weapons[1].SetActive(true);
             weapons[2].SetActive(false);
@@ -175,6 +187,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if(weapon3 != null && weapon3.action.WasPressedThisFrame()){
             Debug.Log("Weapon 3 Activated");
+            currentWeaponIndex = 2;
             weapons[0].SetActive(false);
             weapons[1].SetActive(false);
             weapons[2].SetActive(true);

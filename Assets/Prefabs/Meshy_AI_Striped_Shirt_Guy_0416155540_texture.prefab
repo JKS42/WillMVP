@@ -127,19 +127,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af01ad4d6d93a3e489f175e393fd397c, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.0000020191071
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af01ad4d6d93a3e489f175e393fd397c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0000020191071
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af01ad4d6d93a3e489f175e393fd397c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af01ad4d6d93a3e489f175e393fd397c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af01ad4d6d93a3e489f175e393fd397c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -151,11 +151,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af01ad4d6d93a3e489f175e393fd397c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: af01ad4d6d93a3e489f175e393fd397c, type: 3}
       propertyPath: m_Name
       value: Meshy_AI_Striped_Shirt_Guy_0416155540_texture
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: af01ad4d6d93a3e489f175e393fd397c, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -197,24 +201,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c7fea0a1c2857478fa4e618c31730c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
-  currentHealth: 0
-  MaxHealth: 0
-  agent: {fileID: 4896020572512267694}
   player: {fileID: 6677079807302733305, guid: e74639ef1489a14409c4d04128693ae7, type: 3}
-  FirePoint: {fileID: 5748935117507195405}
-  EnemyBulletPrefab: {fileID: 1323451105410521088, guid: 0cbb9d89471a93d4f97e1f557c6743ef, type: 3}
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  terrainMask:
-    serializedVersion: 2
-    m_Bits: 0
-  patrolRange: 10
+  shootPoint: {fileID: 0}
+  patrolPoints: []
+  patrolInterval: 2
+  sightRange: 15
+  attackRange: 12
+  attackDamage: 10
   attackCooldown: 1
-  forwardShotForce: 10
-  verticalShotForce: 5
-  visionRange: 20
-  engangementRange: 10
+  projectileSpeed: 18
+  projectileLifetime: 4
+  chaseUpdateInterval: 0.2
+  health: 100
+  lostSightGrace: 0.2
 --- !u!195 &4896020572512267694
 NavMeshAgent:
   m_ObjectHideFlags: 0

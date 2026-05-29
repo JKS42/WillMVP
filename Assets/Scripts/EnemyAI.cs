@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using System;
 using System.Collections;
 
 
@@ -21,6 +20,7 @@ public class EnemyAI : MonoBehaviour
 	[SerializeField] private float chaseUpdateInterval = 0.2f;
 	[SerializeField] private int health = 100;
     [SerializeField] private float lostSightGrace = 0.2f;
+	[SerializeField] private float patrolRadius = 8f;
 
 	private NavMeshAgent agent;
 	private int currentPatrolPointIndex;
@@ -28,6 +28,7 @@ public class EnemyAI : MonoBehaviour
 	private bool isEngaged;
 	private float timeSinceLostSight;
 	private float nextAttackTime;
+	private Vector3 patrolOrigin;
 
 	private void Awake()
 	{
@@ -90,6 +91,7 @@ public class EnemyAI : MonoBehaviour
 		}
 
 		agent.stoppingDistance = attackRange;
+		patrolOrigin = transform.position;
 		StartCoroutine(PatrolRoutine());
 	}
 
@@ -241,8 +243,14 @@ public class EnemyAI : MonoBehaviour
 			return;
 		}
 
-		if (!agent.isOnNavMesh || patrolPoints == null || patrolPoints.Length == 0)
+		if (!agent.isOnNavMesh)
 		{
+			return;
+		}
+
+		if (patrolPoints == null || patrolPoints.Length == 0 || !HasAnyPatrolPoint())
+		{
+			PatrolAroundOrigin();
 			return;
 		}
 
@@ -268,6 +276,35 @@ public class EnemyAI : MonoBehaviour
 		}
 
 		currentPatrolPointIndex = (currentPatrolPointIndex + 1) % patrolPoints.Length;
+	}
+
+	private bool HasAnyPatrolPoint()
+	{
+		if (patrolPoints == null)
+		{
+			return false;
+		}
+
+		foreach (Transform patrolPoint in patrolPoints)
+		{
+			if (patrolPoint != null)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private void PatrolAroundOrigin()
+	{
+		Vector3 randomPoint = patrolOrigin + Random.insideUnitSphere * patrolRadius;
+		randomPoint.y = patrolOrigin.y;
+
+		if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, patrolRadius, NavMesh.AllAreas))
+		{
+			agent.SetDestination(hit.position);
+		}
 	}
 
 	private IEnumerator PatrolRoutine()
