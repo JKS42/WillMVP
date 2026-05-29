@@ -72,6 +72,12 @@ public class EnemyAI : MonoBehaviour
 		}
 	}
 
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawWireSphere(transform.position + Vector3.up, sightRange);
+	}
+
 	private void Start()
 	{
 		if (player == null)

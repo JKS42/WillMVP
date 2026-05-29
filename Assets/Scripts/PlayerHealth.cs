@@ -6,8 +6,11 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] public int health = 100;
     public GameObject projectile;
     public GameObject UI;
+    public GameObject playerDeath;
     public GameObject reload;
     public Slider healthBar;
+    private bool isDead = false;
+
     public void setMaxHealth(int health)
     {
         healthBar.maxValue = health;
@@ -25,20 +28,24 @@ public class PlayerHealth : MonoBehaviour
     {
         setMaxHealth(health);
     }
+    private void Update()
+    {
+        PlayerDeath();
+    }
 
     public void TakeDamage(int damage)
     {
+        if (isDead)
+        {
+            return;
+        }
+
         health -= damage;
         SetHealth(health);
 
         if (health <= 0)
         {
-            Destroy(this.gameObject);
-            UI.SetActive(true);
-            reload.SetActive(false);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            Time.timeScale = 0f;
+            Die();
         }
     }
 
@@ -48,5 +55,41 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage(5);
         }
-    }   
+    } 
+    private void PlayerDeath()
+    {
+        if(health <= 0 && !isDead)
+        {
+            Die();
+        }
+        else
+        {
+            isDead = false;
+        }
+            
+    }  
+
+    private void Die()
+    {
+        isDead = true;
+
+        if (playerDeath != null)
+        {
+            playerDeath.SetActive(true);
+        }
+
+        if (UI != null)
+        {
+            UI.SetActive(false);
+        }
+
+        if (reload != null)
+        {
+            reload.SetActive(false);
+        }
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 0f;
+    }
 }

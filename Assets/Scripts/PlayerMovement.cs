@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Weapons")]
     public GameObject[] weapons; // Array to hold weapon GameObjects
     public GameObject[] weaponUI;
+    
     [Header("Movement")]
     public float moveSpeed = 5f;
     public float groundDrag = 5f;
@@ -31,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     public InputActionReference weapon1;
     public InputActionReference weapon2;
     public InputActionReference weapon3;
+    public InputActionReference reloadAction;
 
     Vector2 moveInput;
     Rigidbody rb;
@@ -151,6 +153,7 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
     }
+    
     private void WeaponSwitch(){
         if(weapon1 != null && weapon1.action.WasPressedThisFrame()){
             Debug.Log("Weapon 1 Activated");
