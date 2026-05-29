@@ -21,11 +21,14 @@ public class EnemyAI : MonoBehaviour
 	[SerializeField] private int health = 100;
     [SerializeField] private float lostSightGrace = 0.2f;
 	[SerializeField] private float patrolRadius = 8f;
+	[SerializeField] private GameObject ammoPickupPrefab;
+	[SerializeField] private int ammoPickupAmount = 10;
 
 	private NavMeshAgent agent;
 	private int currentPatrolPointIndex;
 	private bool canSeePlayer;
 	private bool isEngaged;
+	private bool isDead;
 	private float timeSinceLostSight;
 	private float nextAttackTime;
 	private Vector3 patrolOrigin;
@@ -228,11 +231,54 @@ public class EnemyAI : MonoBehaviour
 
 	public void TakeDamage(int damage)
 	{
+		if (isDead)
+		{
+			return;
+		}
+
 		health -= damage;
 		if (health <= 0)
 		{
+			isDead = true;
+			DropPickup();
 			Destroy(gameObject);
 		}
+	}
+
+	private void DropPickup()
+	{
+		GameObject pickup = ammoPickupPrefab != null
+			? Instantiate(ammoPickupPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity)
+			: GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+		pickup.name = "AmmoPickup";
+		pickup.transform.position = transform.position + Vector3.up * 0.5f;
+		pickup.transform.localScale = Vector3.one * 0.35f;
+
+		Collider pickupCollider = pickup.GetComponent<Collider>();
+		if (pickupCollider == null)
+		{
+			pickupCollider = pickup.AddComponent<BoxCollider>();
+		}
+
+		pickupCollider.isTrigger = true;
+
+		Rigidbody pickupRigidbody = pickup.GetComponent<Rigidbody>();
+		if (pickupRigidbody == null)
+		{
+			pickupRigidbody = pickup.AddComponent<Rigidbody>();
+		}
+
+		pickupRigidbody.useGravity = false;
+		pickupRigidbody.isKinematic = true;
+
+		AmmoPickup ammoPickup = pickup.GetComponent<AmmoPickup>();
+		if (ammoPickup == null)
+		{
+			ammoPickup = pickup.AddComponent<AmmoPickup>();
+		}
+
+		ammoPickup.amount = ammoPickupAmount;
 	}
 
 	public void Patrol()

@@ -30052,6 +30052,10 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5962437251617148919, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+      propertyPath: ammoPickupPrefab
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: 9300146a7e2b2144580b8552a6efb6d0, type: 3}
+    - target: {fileID: 5962437251617148919, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -30081,7 +30085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
       propertyPath: m_TagString
@@ -32643,6 +32647,10 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5962437251617148919, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+      propertyPath: ammoPickupPrefab
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: 9300146a7e2b2144580b8552a6efb6d0, type: 3}
+    - target: {fileID: 5962437251617148919, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -32672,7 +32680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
       propertyPath: m_TagString
@@ -60112,6 +60120,10 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5962437251617148919, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+      propertyPath: ammoPickupPrefab
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: 9300146a7e2b2144580b8552a6efb6d0, type: 3}
+    - target: {fileID: 5962437251617148919, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -60141,7 +60153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
       propertyPath: m_TagString
@@ -69916,6 +69928,10 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5962437251617148919, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+      propertyPath: ammoPickupPrefab
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: 9300146a7e2b2144580b8552a6efb6d0, type: 3}
+    - target: {fileID: 5962437251617148919, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -69945,7 +69961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
       propertyPath: m_TagString
@@ -72864,6 +72880,10 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5962437251617148919, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+      propertyPath: ammoPickupPrefab
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: 9300146a7e2b2144580b8552a6efb6d0, type: 3}
+    - target: {fileID: 5962437251617148919, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -72893,7 +72913,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
       propertyPath: m_TagString
@@ -92792,6 +92812,10 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5962437251617148919, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+      propertyPath: ammoPickupPrefab
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: 9300146a7e2b2144580b8552a6efb6d0, type: 3}
+    - target: {fileID: 5962437251617148919, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -92821,7 +92845,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
       propertyPath: m_TagString
