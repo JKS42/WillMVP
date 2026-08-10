@@ -30095,13 +30095,49 @@ PrefabInstance:
     - {fileID: 5962437251617148919, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 747276549}
   m_SourcePrefab: {fileID: 100100000, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
 --- !u!4 &747276547 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6380852648674391740, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
   m_PrefabInstance: {fileID: 747276546}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &747276548 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+  m_PrefabInstance: {fileID: 747276546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &747276549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747276548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a3b34f8777e83e4db29f57ab60bd5c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  player: {fileID: 0}
+  shootPoint: {fileID: 0}
+  patrolPoints: []
+  patrolInterval: 2
+  sightRange: 15
+  attackRange: 12
+  attackDamage: 10
+  attackCooldown: 1
+  projectileSpeed: 18
+  projectileLifetime: 4
+  chaseUpdateInterval: 0.2
+  health: 100
+  lostSightGrace: 0.2
+  patrolRadius: 8
+  ammoPickupPrefab: {fileID: 0}
+  ammoPickupAmount: 10
 --- !u!1 &747423932
 GameObject:
   m_ObjectHideFlags: 0
@@ -32691,13 +32727,49 @@ PrefabInstance:
     - {fileID: 5962437251617148919, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 827769561}
   m_SourcePrefab: {fileID: 100100000, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
 --- !u!4 &827769559 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6380852648674391740, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
   m_PrefabInstance: {fileID: 827769558}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &827769560 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+  m_PrefabInstance: {fileID: 827769558}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &827769561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827769560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a3b34f8777e83e4db29f57ab60bd5c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  player: {fileID: 0}
+  shootPoint: {fileID: 0}
+  patrolPoints: []
+  patrolInterval: 2
+  sightRange: 15
+  attackRange: 12
+  attackDamage: 10
+  attackCooldown: 1
+  projectileSpeed: 18
+  projectileLifetime: 4
+  chaseUpdateInterval: 0.2
+  health: 100
+  lostSightGrace: 0.2
+  patrolRadius: 8
+  ammoPickupPrefab: {fileID: 0}
+  ammoPickupAmount: 10
 --- !u!1001 &829121330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60165,8 +60237,44 @@ PrefabInstance:
     - {fileID: 5962437251617148919, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1415630585}
   m_SourcePrefab: {fileID: 100100000, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+--- !u!1 &1415630584 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+  m_PrefabInstance: {fileID: 1415630583}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1415630585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415630584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a3b34f8777e83e4db29f57ab60bd5c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  player: {fileID: 0}
+  shootPoint: {fileID: 0}
+  patrolPoints: []
+  patrolInterval: 2
+  sightRange: 15
+  attackRange: 12
+  attackDamage: 10
+  attackCooldown: 1
+  projectileSpeed: 18
+  projectileLifetime: 4
+  chaseUpdateInterval: 0.2
+  health: 100
+  lostSightGrace: 0.2
+  patrolRadius: 8
+  ammoPickupPrefab: {fileID: 0}
+  ammoPickupAmount: 10
 --- !u!1001 &1418774081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69974,13 +70082,80 @@ PrefabInstance:
     - {fileID: 5962437251617148919, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1610779612}
+    - targetCorrespondingSourceObject: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1610779611}
   m_SourcePrefab: {fileID: 100100000, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
 --- !u!4 &1610779609 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6380852648674391740, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
   m_PrefabInstance: {fileID: 1610779608}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1610779610 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+  m_PrefabInstance: {fileID: 1610779608}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1610779611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610779610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a3b34f8777e83e4db29f57ab60bd5c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  player: {fileID: 0}
+  shootPoint: {fileID: 0}
+  patrolPoints: []
+  patrolInterval: 2
+  sightRange: 15
+  attackRange: 12
+  attackDamage: 10
+  attackCooldown: 1
+  projectileSpeed: 18
+  projectileLifetime: 4
+  chaseUpdateInterval: 0.2
+  health: 100
+  lostSightGrace: 0.2
+  patrolRadius: 8
+  ammoPickupPrefab: {fileID: 0}
+  ammoPickupAmount: 10
+--- !u!114 &1610779612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610779610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a3b34f8777e83e4db29f57ab60bd5c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  player: {fileID: 0}
+  shootPoint: {fileID: 0}
+  patrolPoints: []
+  patrolInterval: 2
+  sightRange: 15
+  attackRange: 12
+  attackDamage: 10
+  attackCooldown: 1
+  projectileSpeed: 18
+  projectileLifetime: 4
+  chaseUpdateInterval: 0.2
+  health: 100
+  lostSightGrace: 0.2
+  patrolRadius: 8
+  ammoPickupPrefab: {fileID: 0}
+  ammoPickupAmount: 10
 --- !u!1001 &1611753019
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -72927,13 +73102,49 @@ PrefabInstance:
     - {fileID: 5962437251617148919, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1665130445}
   m_SourcePrefab: {fileID: 100100000, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
 --- !u!4 &1665130443 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6380852648674391740, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
   m_PrefabInstance: {fileID: 1665130442}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1665130444 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+  m_PrefabInstance: {fileID: 1665130442}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1665130445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665130444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a3b34f8777e83e4db29f57ab60bd5c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  player: {fileID: 0}
+  shootPoint: {fileID: 0}
+  patrolPoints: []
+  patrolInterval: 2
+  sightRange: 15
+  attackRange: 12
+  attackDamage: 10
+  attackCooldown: 1
+  projectileSpeed: 18
+  projectileLifetime: 4
+  chaseUpdateInterval: 0.2
+  health: 100
+  lostSightGrace: 0.2
+  patrolRadius: 8
+  ammoPickupPrefab: {fileID: 0}
+  ammoPickupAmount: 10
 --- !u!1001 &1671327321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -92864,13 +93075,49 @@ PrefabInstance:
     - {fileID: 5962437251617148919, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2129715167}
   m_SourcePrefab: {fileID: 100100000, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
 --- !u!4 &2129715165 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6380852648674391740, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
   m_PrefabInstance: {fileID: 2129715164}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2129715166 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8123128613488240663, guid: 7bea49978e0587a4ca4bdec8a261c901, type: 3}
+  m_PrefabInstance: {fileID: 2129715164}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2129715167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129715166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a3b34f8777e83e4db29f57ab60bd5c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  player: {fileID: 0}
+  shootPoint: {fileID: 0}
+  patrolPoints: []
+  patrolInterval: 2
+  sightRange: 15
+  attackRange: 12
+  attackDamage: 10
+  attackCooldown: 1
+  projectileSpeed: 18
+  projectileLifetime: 4
+  chaseUpdateInterval: 0.2
+  health: 100
+  lostSightGrace: 0.2
+  patrolRadius: 8
+  ammoPickupPrefab: {fileID: 0}
+  ammoPickupAmount: 10
 --- !u!1001 &2136319362
 PrefabInstance:
   m_ObjectHideFlags: 0
