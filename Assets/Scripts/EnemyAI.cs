@@ -1,369 +1,438 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using System;
+using System.Collections.Generic;
 
 
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyAI : MonoBehaviour
 {
-	[SerializeField] private Transform player;
-	[SerializeField] private Transform shootPoint;
-	[SerializeField] private Transform[] patrolPoints;
-	[SerializeField] private float patrolInterval = 2f;
-	[SerializeField] private float sightRange = 15f;
-	[SerializeField] private float attackRange = 12f;
-	[SerializeField] private int attackDamage = 10;
-	[SerializeField] private float attackCooldown = 1f;
-	[SerializeField] private float projectileSpeed = 18f;
-	[SerializeField] private float projectileLifetime = 4f;
-	[SerializeField] private float chaseUpdateInterval = 0.2f;
-	[SerializeField] private int health = 100;
-    [SerializeField] private float lostSightGrace = 0.2f;
-	[SerializeField] private float patrolRadius = 8f;
-	[SerializeField] private GameObject ammoPickupPrefab;
-	[SerializeField] private int ammoPickupAmount = 10;
+	[Header("References")]
+    public Transform player;                      
+    public PlayerHealth playerStats;              
+    public List<Transform> patrolPoints = new List<Transform>(); 
 
-	private NavMeshAgent agent;
-	private int currentPatrolPointIndex;
-	private bool canSeePlayer;
-	private bool isEngaged;
-	private bool isDead;
-	private float timeSinceLostSight;
-	private float nextAttackTime;
-	private Vector3 patrolOrigin;
+    [Header("Enemy Stats")]
+    public float maxHealth = 100f;               
+    public float currentHealth = 100f;           
+    public int ammo = 3;                         
+    public int maxAmmo = 3;                      
 
-	private void Awake()
-	{
-		agent = GetComponent<NavMeshAgent>();
-	}
+    [Header("Decision Ranges")]
+    public float detectionRange = 10f;           
+    public float attackRange = 2.2f;             
+    public float lowHealthThreshold = 25f;       
 
-	private void OnValidate()
-	{
-		if (sightRange < 0f)
-		{
-			sightRange = 0f;
-		}
+    [Header("Movement")]
+    public float patrolSpeed = 2f;               
+    public float chaseSpeed = 3.5f;              
+    public float fleeSpeed = 4f;                 
+    public float patrolPointStopDistance = 0.2f; 
 
-		if (patrolInterval < 0.1f)
-		{
-			patrolInterval = 0.1f;
-		}
+    [Header("Combat")]
+    public float attackCooldown = 1f;            
+    public float reloadTime = 2f;                
+    public int attackDamage = 10;             
 
-		if (chaseUpdateInterval < 0.05f)
-		{
-			chaseUpdateInterval = 0.05f;
-		}
+    [Header("Debug Controls")]
+    public KeyCode damageEnemyKey = KeyCode.H;   
+    public KeyCode healEnemyKey = KeyCode.J;     
+    public KeyCode addAmmoKey = KeyCode.R;       
+    public KeyCode emptyAmmoKey = KeyCode.T;     
+    public float debugDamageAmount = 20f;        
+    public float debugHealAmount = 20f;          
 
-		if (attackRange < 0f)
-		{
-			attackRange = 0f;
-		}
+    [Header("State Debug")]
+    public string currentDecision;               
+    public Color gizmoColor = Color.white;       
 
-		if (attackCooldown < 0.05f)
-		{
-			attackCooldown = 0.05f;
-		}
+    private DecisionNode rootNode;               
+    private int patrolIndex;                     
+    private float attackTimer;                   
+    private float reloadTimer;                   
+    private bool isReloading;                    
 
-		if (projectileSpeed < 0.1f)
-		{
-			projectileSpeed = 0.1f;
-		}
+    private void Awake()
+    {
+        
+        currentHealth = maxHealth;
 
-		if (projectileLifetime < 0.1f)
-		{
-			projectileLifetime = 0.1f;
-		}
-	}
+        
+        
+        if (player != null && playerStats == null)
+        {
+            playerStats = player.GetComponent<PlayerHealth>();
+        }
 
-	private void OnDrawGizmos()
-	{
-		Gizmos.color = Color.yellow;
-		Gizmos.DrawWireSphere(transform.position + Vector3.up, sightRange);
-	}
+        // Build the decision tree once when the enemy starts
+        BuildDecisionTree();
+    }
 
-	private void Start()
-	{
-		if (player == null)
-		{
-			GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-			if (playerObject != null)
-			{
-				player = playerObject.transform;
-			}
-		}
+    private void Update()
+    {
+        
+        HandleDebugInput();
 
-		agent.stoppingDistance = attackRange;
-		patrolOrigin = transform.position;
-		StartCoroutine(PatrolRoutine());
-	}
+       
+        if (player == null)
+            return;
 
-	private void Update()
-	{
-		bool currentlyCanSee = CanSeePlayer();
-		canSeePlayer = currentlyCanSee;
+        
+        attackTimer -= Time.deltaTime;
 
-		if (currentlyCanSee)
-		{
-			// We have line of sight — become/ remain engaged and handle combat
-			isEngaged = true;
-			timeSinceLostSight = 0f;
-			HandleRangedCombat();
-		}
-		else if (isEngaged)
-		{
-			// Lost sight briefly — allow a small grace window before disengaging.
-			timeSinceLostSight += Time.deltaTime;
-			if (timeSinceLostSight >= lostSightGrace)
-			{
-				isEngaged = false;
-				agent.isStopped = false;
-			}
-			else
-			{
-				// Still within grace window: keep attempting ranged combat (hold position/attack)
-				HandleRangedCombat();
-			}
-		}
-		else if (agent.isOnNavMesh)
-		{
-			agent.isStopped = false;
-		}
-	}
+        // Evaluate the decision tree and store the chosen action
+        string decision = EvaluateTree(rootNode);
+        currentDecision = decision;
 
-	public bool CanSeePlayer()
-	{
-		if (player == null)
-		{
-			return false;
-		}
+        // Perform the action chosen by the decision tree
+        switch (decision)
+        {
+            case "Patrol":
+                gizmoColor = Color.green;
+                Patrol();
+                break;
 
-		Vector3 origin = transform.position + Vector3.up;
-		Vector3 target = player.position + Vector3.up;
-		Vector3 direction = target - origin;
+            case "Chase":
+                gizmoColor = Color.yellow;
+                Chase();
+                break;
 
-		if (direction.sqrMagnitude > sightRange * sightRange)
-		{
-			return false;
-		}
+            case "Attack":
+                gizmoColor = Color.red;
+                Attack();
+                break;
 
-		if (Physics.Raycast(origin, direction.normalized, out RaycastHit hit, sightRange, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
-		{
-			return hit.transform == player || hit.transform.IsChildOf(player);
-		}
+            case "Reload":
+                gizmoColor = Color.cyan;
+                Reload();
+                break;
 
-		return false;
-	}
+            case "Flee":
+                gizmoColor = Color.magenta;
+                Flee();
+                break;
+        }
+    }
 
-	public void ChasePlayer()
-	{
-		if (player == null || !agent.isOnNavMesh)
-		{
-			return;
-		}
+    
+    /// Creates the full decision tree structure.
+    private void BuildDecisionTree()
+    {
+        // Action nodes = final decisions / leaf nodes
+        ActionNode patrolNode = new ActionNode("Patrol");
+        ActionNode chaseNode = new ActionNode("Chase");
+        ActionNode attackNode = new ActionNode("Attack");
+        ActionNode reloadNode = new ActionNode("Reload");
+        ActionNode fleeNode = new ActionNode("Flee");
 
-		agent.SetDestination(player.position);
-	}
+        // Question: Is the player close enough to detect?
+        QuestionNode playerNearbyNode = new QuestionNode(
+            "Is player nearby?",
+            () => DistanceToPlayer() <= detectionRange
+        );
 
-	public void AttackPlayer()
-	{
-		ShootPlayer();
-	}
+        // Question: Is enemy health low?
+        QuestionNode lowHealthNode = new QuestionNode(
+            "Is health low?",
+            () => currentHealth <= lowHealthThreshold
+        );
 
-	public void ShootPlayer()
-	{
-		if (player == null || Time.time < nextAttackTime)
-		{
-			return;
-		}
+        // Question: Is the player close enough to attack?
+        QuestionNode playerInAttackRangeNode = new QuestionNode(
+            "Is player in attack range?",
+            () => DistanceToPlayer() <= attackRange
+        );
 
-		float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-		if (distanceToPlayer > attackRange)
-		{
-			return;
-		}
+        // Question: Does the enemy still have ammo?
+        QuestionNode hasAmmoNode = new QuestionNode(
+            "Has ammo?",
+            () => ammo > 0
+        );
 
-		GameObject projectile = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-		projectile.name = "EnemyProjectile";
-		projectile.transform.position = shootPoint != null ? shootPoint.position : transform.position + Vector3.up * 1.5f + transform.forward * 0.8f;
-		projectile.transform.localScale = Vector3.one * 0.2f;
 
-		Collider projectileCollider = projectile.GetComponent<Collider>();
-		projectileCollider.isTrigger = true;
+        // Connect the branches of the tree
+        playerNearbyNode.falseNode = patrolNode;
+        playerNearbyNode.trueNode = lowHealthNode;
 
-		Rigidbody projectileRigidbody = projectile.AddComponent<Rigidbody>();
-		projectileRigidbody.useGravity = false;
-		projectileRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        lowHealthNode.trueNode = fleeNode;
+        lowHealthNode.falseNode = playerInAttackRangeNode;
 
-		EnemyProjectile enemyProjectile = projectile.AddComponent<EnemyProjectile>();
-		enemyProjectile.Initialize(attackDamage, projectileLifetime);
+        playerInAttackRangeNode.falseNode = chaseNode;
+        playerInAttackRangeNode.trueNode = hasAmmoNode;
 
-		Vector3 direction = (player.position + Vector3.up) - projectile.transform.position;
-		projectileRigidbody.linearVelocity = direction.normalized * projectileSpeed;
+        hasAmmoNode.trueNode = attackNode;
+        hasAmmoNode.falseNode = reloadNode;
 
-		foreach (Collider enemyCollider in GetComponentsInChildren<Collider>())
-		{
-			Physics.IgnoreCollision(projectileCollider, enemyCollider);
-		}
+        // Set the first question as the root of the tree
+        rootNode = playerNearbyNode;
+    }
 
-		nextAttackTime = Time.time + attackCooldown;
-	}
+    /// Starts at the root node and moves through the tree
+    /// until an action node is found.
+    private string EvaluateTree(DecisionNode currentNode)
+    {
+        while (currentNode != null)
+        {
+            // If we reached an action node, return that action
+            if (currentNode is ActionNode actionNode)
+                return actionNode.actionName;
 
-	private void HandleRangedCombat()
-	{
-		if (player == null || !agent.isOnNavMesh)
-		{
-			return;
-		}
+            // If this is a question node, evaluate its condition
+            if (currentNode is QuestionNode questionNode)
+            {
+                bool result = questionNode.condition.Invoke();
 
-		float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-		if (distanceToPlayer > attackRange)
-		{
-			agent.isStopped = false;
-			ChasePlayer();
-		}
-		else
-		{
-			agent.isStopped = true;
-			AttackPlayer();
-		}
-	}
+                // Move to the true branch or false branch depending on result
+                currentNode = result ? questionNode.trueNode : questionNode.falseNode;
+            }
+        }
 
-	public void TakeDamage(int damage)
-	{
-		if (isDead)
-		{
-			return;
-		}
+        // Safety fallback
+        return "None";
+    }
 
-		health -= damage;
-		if (health <= 0)
-		{
-			isDead = true;
-			DropPickup();
-			Destroy(gameObject);
-		}
-	}
+    /// Moves between patrol points in a loop.
+    private void Patrol()
+    {
+        // Stop if there are no patrol points assigned
+        if (patrolPoints == null || patrolPoints.Count == 0)
+            return;
 
-	private void DropPickup()
-	{
-		GameObject pickup = ammoPickupPrefab != null
-			? Instantiate(ammoPickupPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity)
-			: GameObject.CreatePrimitive(PrimitiveType.Cube);
+        // Get the current patrol target
+        Transform target = patrolPoints[patrolIndex];
 
-		pickup.name = "AmmoPickup";
-		pickup.transform.position = transform.position + Vector3.up * 0.5f;
-		pickup.transform.localScale = Vector3.one * 0.35f;
+        // Keep target on the same Y level as the enemy
+        Vector3 targetPosition = new Vector3(target.position.x, transform.position.y, target.position.z);
 
-		Collider pickupCollider = pickup.GetComponent<Collider>();
-		if (pickupCollider == null)
-		{
-			pickupCollider = pickup.AddComponent<BoxCollider>();
-		}
+        // Check distance to the patrol point
+        float distance = Vector3.Distance(transform.position, targetPosition);
 
-		pickupCollider.isTrigger = true;
+        // If close enough, switch to the next patrol point
+        if (distance <= patrolPointStopDistance)
+        {
+            patrolIndex = (patrolIndex + 1) % patrolPoints.Count;
+            target = patrolPoints[patrolIndex];
+            targetPosition = new Vector3(target.position.x, transform.position.y, target.position.z);
+        }
 
-		Rigidbody pickupRigidbody = pickup.GetComponent<Rigidbody>();
-		if (pickupRigidbody == null)
-		{
-			pickupRigidbody = pickup.AddComponent<Rigidbody>();
-		}
+        // Move to the patrol point
+        MoveTowards(targetPosition, patrolSpeed);
+    }
 
-		pickupRigidbody.useGravity = false;
-		pickupRigidbody.isKinematic = true;
+    /// Moves directly toward the player.
+    private void Chase()
+    {
+        MoveTowards(player.position, chaseSpeed);
+    }
 
-		AmmoPickup ammoPickup = pickup.GetComponent<AmmoPickup>();
-		if (ammoPickup == null)
-		{
-			ammoPickup = pickup.AddComponent<AmmoPickup>();
-		}
+    /// Faces the player and attacks if cooldown allows and ammo is available.
+    private void Attack()
+    {
 
-		ammoPickup.amount = ammoPickupAmount;
-	}
+        FaceTarget(player.position);
 
-	public void Patrol()
-	{
-		if (isEngaged)
-		{
-			ChasePlayer();
-			return;
-		}
 
-		if (!agent.isOnNavMesh)
-		{
-			return;
-		}
+        if (attackTimer > 0f)
+            return;
 
-		if (patrolPoints == null || patrolPoints.Length == 0 || !HasAnyPatrolPoint())
-		{
-			PatrolAroundOrigin();
-			return;
-		}
 
-		if (agent.pathPending || (agent.hasPath && agent.remainingDistance > agent.stoppingDistance))
-		{
-			return;
-		}
+        if (ammo <= 0)
+            return;
 
-		Transform targetPoint = patrolPoints[currentPatrolPointIndex];
-		if (targetPoint == null)
-		{
-			currentPatrolPointIndex = (currentPatrolPointIndex + 1) % patrolPoints.Length;
-			return;
-		}
 
-		if (NavMesh.SamplePosition(targetPoint.position, out NavMeshHit hit, 1.5f, NavMesh.AllAreas))
-		{
-			agent.SetDestination(hit.position);
-		}
-		else
-		{
-			agent.SetDestination(targetPoint.position);
-		}
+        ammo--;
 
-		currentPatrolPointIndex = (currentPatrolPointIndex + 1) % patrolPoints.Length;
-	}
 
-	private bool HasAnyPatrolPoint()
-	{
-		if (patrolPoints == null)
-		{
-			return false;
-		}
+        attackTimer = attackCooldown;
 
-		foreach (Transform patrolPoint in patrolPoints)
-		{
-			if (patrolPoint != null)
-			{
-				return true;
-			}
-		}
+        Debug.Log($"Enemy ATTACKS. Ammo left: {ammo}");
 
-		return false;
-	}
 
-	private void PatrolAroundOrigin()
-	{
-		Vector3 randomPoint = patrolOrigin + Random.insideUnitSphere * patrolRadius;
-		randomPoint.y = patrolOrigin.y;
+        if (playerStats != null)
+        {
+            playerStats.TakeDamage(attackDamage);
+        }
+    }
 
-		if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, patrolRadius, NavMesh.AllAreas))
-		{
-			agent.SetDestination(hit.position);
-		}
-	}
+    /// Handles reloading over time.
 
-	private IEnumerator PatrolRoutine()
-	{
-		while (true)
-		{
-			if (!canSeePlayer && agent.isOnNavMesh && (!agent.hasPath || agent.remainingDistance <= agent.stoppingDistance))
-			{
-				Patrol();
-			}
+    private void Reload()
+    {
 
-			yield return new WaitForSeconds(patrolInterval);
-		}
-	}
+        FaceTarget(player.position);
 
+   
+        if (!isReloading)
+        {
+            isReloading = true;
+            reloadTimer = reloadTime;
+            Debug.Log("Enemy started RELOADING.");
+        }
+
+  
+        reloadTimer -= Time.deltaTime;
+
+    
+        if (reloadTimer <= 0f)
+        {
+            ammo = maxAmmo;
+            isReloading = false;
+            Debug.Log("Enemy finished RELOADING.");
+        }
+    }
+
+
+    /// Moves away from the player when health is low.
+    private void Flee()
+    {
+        isReloading = false;
+
+        Vector3 awayDirection = (transform.position - player.position).normalized;
+
+        Vector3 fleeTarget = transform.position + awayDirection * 3f;
+
+        MoveTowards(fleeTarget, fleeSpeed);
+    }
+
+    /// Smoothly moves the enemy toward a target position.
+    private void MoveTowards(Vector3 targetPosition, float speed)
+    {
+        // Move step by step toward the target
+        Vector3 nextPosition = Vector3.MoveTowards(
+            transform.position,
+            targetPosition,
+            speed * Time.deltaTime
+        );
+
+        // Work out the direction the enemy should face
+        Vector3 direction = (targetPosition - transform.position);
+        direction.y = 0f;
+
+        // Only rotate if the direction is large enough
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            transform.forward = direction.normalized;
+        }
+
+        // Apply the new position
+        transform.position = nextPosition;
+    }
+
+    /// Rotates the enemy to face a target without moving.
+    private void FaceTarget(Vector3 targetPosition)
+    {
+        // Flatten the target so the enemy only rotates on the Y axis
+        Vector3 flatTarget = new Vector3(targetPosition.x, transform.position.y, targetPosition.z);
+        Vector3 direction = (flatTarget - transform.position).normalized;
+
+        // Rotate only if the direction is valid
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            transform.forward = direction;
+        }
+    }
+
+    /// Returns the flat distance between enemy and player.
+    /// Y is ignored so height differences do not matter.
+    private float DistanceToPlayer()
+    {
+        if (player == null)
+            return Mathf.Infinity;
+
+        Vector3 a = new Vector3(transform.position.x, 0f, transform.position.z);
+        Vector3 b = new Vector3(player.position.x, 0f, player.position.z);
+
+        return Vector3.Distance(a, b);
+    }
+
+    /// Debug controls for testing the tree quickly during play mode.
+    private void HandleDebugInput()
+    {
+        // Damage enemy
+        if (Input.GetKeyDown(damageEnemyKey))
+        {
+            currentHealth -= debugDamageAmount;
+            currentHealth = Mathf.Max(currentHealth, 0f);
+            Debug.Log($"Enemy damaged. HP: {currentHealth}");
+        }
+
+        // Heal enemy
+        if (Input.GetKeyDown(healEnemyKey))
+        {
+            currentHealth += debugHealAmount;
+            currentHealth = Mathf.Min(currentHealth, maxHealth);
+            Debug.Log($"Enemy healed. HP: {currentHealth}");
+        }
+
+        // Refill ammo
+        if (Input.GetKeyDown(addAmmoKey))
+        {
+            ammo = maxAmmo;
+            isReloading = false;
+            Debug.Log($"Enemy ammo reset to {ammo}");
+        }
+
+        // Empty ammo
+        if (Input.GetKeyDown(emptyAmmoKey))
+        {
+            ammo = 0;
+            isReloading = false;
+            Debug.Log("Enemy ammo emptied.");
+        }
+    }
+
+    /// Draws debug gizmos in the Scene view.
+    private void OnDrawGizmos()
+    {
+        // Blue circle = detection range
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
+
+        // Red circle = attack range
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        // Small sphere above enemy = current state color
+        Gizmos.color = gizmoColor;
+        Gizmos.DrawSphere(transform.position + Vector3.up * 1.5f, 0.25f);
+    }
 }
+
+/// Base class for all decision tree nodes.
+public abstract class DecisionNode
+{
+}
+
+/// A question node stores:
+/// - a question
+/// - a condition to test
+/// - a true branch
+/// - a false branch
+public class QuestionNode : DecisionNode
+{
+    public string questionText;
+    public Func<bool> condition;
+    public DecisionNode trueNode;
+    public DecisionNode falseNode;
+
+    public QuestionNode(string questionText, Func<bool> condition)
+    {
+        this.questionText = questionText;
+        this.condition = condition;
+    }
+}
+
+
+/// An action node is a final answer in the tree.
+public class ActionNode : DecisionNode
+{
+    public string actionName;
+
+    public ActionNode(string actionName)
+    {
+        this.actionName = actionName;
+    }
+}
+
